@@ -1,4 +1,5 @@
 const express = require('express');
+const { readFile } = require('fs');
 
 const app = express();
 app.use(express.json());
@@ -13,4 +14,9 @@ app.get('/', (_request, response) => {
 
 app.listen(PORT, () => {
   console.log('Online');
+});
+
+app.get('/talker', async (_req, res) => {
+  const talkers = await readFile();
+  res.status(200).json(talkers);
 });
