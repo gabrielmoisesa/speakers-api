@@ -3,7 +3,7 @@ const path = require('path');
 
 const talkersPath = path.resolve(__dirname, '../talker.json');
 
-const readFile = async () => {
+const readTalkers = async () => {
   try {
     const content = await fs.readFile(talkersPath, 'utf-8');
     return JSON.parse(content);
@@ -14,11 +14,11 @@ const readFile = async () => {
 
 const getTalkerById = async (id) => {
   try {
-    const talkers = await readFile();
+    const talkers = await readTalkers();
     return talkers.find((talker) => talker.id === Number(id));
   } catch (error) {
     console.log(`getTalkerById error: ${error.message}`);
   }
 };
 
-module.exports = { readFile, getTalkerById };
+module.exports = { readTalkers, getTalkerById };
