@@ -12,4 +12,13 @@ const readFile = async () => {
   }
 };
 
-module.exports = { readFile };
+const getTalkerById = async (id) => {
+  try {
+    const talkers = await readFile();
+    return talkers.find((talker) => talker.id === Number(id));
+  } catch (error) {
+    console.log(`getTalkerById error: ${error.message}`);
+  }
+};
+
+module.exports = { readFile, getTalkerById };

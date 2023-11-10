@@ -1,5 +1,5 @@
 const express = require('express');
-const { readFile } = require('./fsUtils');
+const { readFile, getTalkerById } = require('./fsUtils');
 
 const app = express();
 app.use(express.json());
@@ -22,6 +22,14 @@ app.get('/talker', async (_req, res) => {
   res.status(200).json(talkers);
 });
 
+app.get('/talker/:id', async (req, res) => {
+  const { id } = req.params;
+  const talkerById = await getTalkerById(id);
+  if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  res.status(200).json(talkerById);
+});
+
+// Error middleware
 app.use((err, _req, res, _next) => {
   res.status(500).json({ message: `error: ${err.message}` });
 });
