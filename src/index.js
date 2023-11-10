@@ -1,7 +1,7 @@
 const express = require('express');
-const { readFile, getTalkerById } = require('./fsUtils');
+const { readFile, getTalkerById } = require('./utils/fsUtils');
 const { validateLogin } = require('./middlewares');
-const generateToken = require('./generateToken');
+const { generateToken } = require('./utils/utils');
 
 const app = express();
 app.use(express.json());

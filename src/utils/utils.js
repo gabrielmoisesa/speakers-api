@@ -11,4 +11,9 @@ const generateToken = () => {
   return token;
 };
 
-module.exports = generateToken;
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+module.exports = { generateToken, validateEmail };
