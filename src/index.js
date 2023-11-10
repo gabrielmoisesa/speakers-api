@@ -1,5 +1,5 @@
 const express = require('express');
-const { readFile } = require('fs');
+const { readFile } = require('./fsUtils');
 
 const app = express();
 app.use(express.json());
@@ -18,5 +18,10 @@ app.listen(PORT, () => {
 
 app.get('/talker', async (_req, res) => {
   const talkers = await readFile();
+  if (!talkers) return res.status(200).json([]);
   res.status(200).json(talkers);
+});
+
+app.use((err, _req, res, _next) => {
+  res.status(500).json({ message: `error: ${err.message}` });
 });
