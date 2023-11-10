@@ -1,5 +1,7 @@
 const express = require('express');
 const { readFile, getTalkerById } = require('./fsUtils');
+const { validateLogin } = require('./middlewares');
+const generateToken = require('./generateToken');
 
 const app = express();
 app.use(express.json());
@@ -27,6 +29,10 @@ app.get('/talker/:id', async (req, res) => {
   const talkerById = await getTalkerById(id);
   if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   res.status(200).json(talkerById);
+});
+
+app.post('/login', validateLogin, (_req, res) => {
+  res.status(200).json({ token: generateToken() });
 });
 
 // Error middleware
