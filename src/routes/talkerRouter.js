@@ -1,5 +1,13 @@
 const express = require('express');
-const { getTalkerById, readTalkers, writeTalker, updateTalker } = require('../utils/fsUtils');
+
+const {
+  getTalkerById,
+  readTalkers,
+  writeTalker,
+  updateTalker,
+  deleteTalker,
+} = require('../utils/fsUtils');
+
 const { validateTalker, validateToken, validateId } = require('../middlewares');
 
 const router = express.Router();
@@ -29,6 +37,12 @@ router.put('/:id', validateToken, validateId, validateTalker, async (req, res) =
   await updateTalker(id, updatedTalker);
   const talkerById = await getTalkerById(id);
   res.status(200).json(talkerById);
+});
+
+router.delete('/:id', validateToken, validateId, async (req, res) => {
+  const { id } = req.params;
+  await deleteTalker(id);
+  res.status(204).end();
 });
 
 module.exports = router;
