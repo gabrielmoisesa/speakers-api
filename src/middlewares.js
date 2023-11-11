@@ -1,5 +1,13 @@
+const { getTalkerById } = require('./utils/fsUtils');
 const { isEmailValid } = require('./utils/utils');
 const { validateRequiredFields, validateFieldsRules } = require('./validation/talkerValidation');
+
+const validateId = async (req, res, next) => {
+  const { id } = req.params;
+  const talkerById = await getTalkerById(id);
+  if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  next();
+};
 
 const validateLogin = (req, res, next) => {
   const { email, password } = req.body;
@@ -42,4 +50,4 @@ const validateToken = (req, res, next) => {
   next();
 };
 
-module.exports = { validateLogin, validateTalker, validateToken };
+module.exports = { validateLogin, validateTalker, validateToken, validateId };
