@@ -1,10 +1,11 @@
-const { validateEmail, validateRequiredFields, validateFieldsRules } = require('./utils/utils');
+const { isEmailValid } = require('./utils/utils');
+const { validateRequiredFields, validateFieldsRules } = require('./validation/talkerValidation');
 
 const validateLogin = (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) return res.status(400).json({ message: 'O campo "email" é obrigatório' });
-  if (!validateEmail(email)) {
+  if (!isEmailValid(email)) {
     return res.status(400).json({ message: 'O "email" deve ter o formato "email@email.com"' });
   }
 
