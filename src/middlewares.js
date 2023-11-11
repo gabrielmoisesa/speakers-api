@@ -1,4 +1,4 @@
-const { validateEmail } = require('./utils/utils');
+const { validateEmail, validateRequiredFields, validateFieldsRules } = require('./utils/utils');
 
 const validateLogin = (req, res, next) => {
   const { email, password } = req.body;
@@ -16,4 +16,29 @@ const validateLogin = (req, res, next) => {
   next();
 };
 
-module.exports = { validateLogin };
+const validateTalker = (req, res, next) => {
+  const requiredValidation = validateRequiredFields(['name', 'age', 'talk'], req.body);
+  if (requiredValidation !== true) return res.status(400).json({ message: requiredValidation });
+
+  const requiredTalkValidation = validateRequiredFields(['watchedAt', 'rate'], req.body.talk);
+  if (requiredTalkValidation !== true) {
+    return res.status(400).json({ message: requiredTalkValidation });
+  }
+
+  const rulesValidation = validateFieldsRules(req.body);
+  if (rulesValidation !== true) return res.status(400).json({ message: rulesValidation });
+
+  next();
+};
+
+const validateToken = (req, res, next) => {
+  const { authorization } = req.headers;
+  if (!authorization) return res.status(401).json({ message: 'Token não encontrado' });
+  if (authorization.length !== 16) return res.status(401).json({ message: 'Token inválido' });
+  if (typeof authorization !== 'string') {
+    return res.status(401).json({ message: 'Token inválido: precisa ser uma string' });
+  } 
+  next();
+};
+
+module.exports = { validateLogin, validateTalker, validateToken };

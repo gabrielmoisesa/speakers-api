@@ -21,4 +21,23 @@ const getTalkerById = async (id) => {
   }
 };
 
-module.exports = { readTalkers, getTalkerById };
+const writeTalker = async (newTalker) => {
+  try {    
+    const talkers = await readTalkers();
+    let newId = talkers.length + 1;
+
+    talkers.forEach((talker) => {
+      if (talker.id === newId) newId += 1;
+    });
+
+    const { name, age, talk } = newTalker;
+    const newTalkerWithId = { name, age, id: newId, talk };
+    talkers.push(newTalkerWithId);
+
+    await fs.writeFile(talkersPath, JSON.stringify(talkers, null, 2));
+  } catch (error) {
+    console.log(`writeTalker error: ${error.message}`);
+  }
+};
+
+module.exports = { readTalkers, getTalkerById, writeTalker };
