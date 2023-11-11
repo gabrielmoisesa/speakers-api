@@ -40,4 +40,19 @@ const writeTalker = async (newTalker) => {
   }
 };
 
-module.exports = { readTalkers, getTalkerById, writeTalker };
+const updateTalker = async (id, updatedTalker) => {
+  try {
+    const talkers = await readTalkers();
+    const talkerIndex = talkers.findIndex((talker) => talker.id === Number(id));
+
+    if (talkerIndex === -1) return false;
+
+    talkers[talkerIndex] = { ...talkers[talkerIndex], ...updatedTalker };
+
+    await fs.writeFile(talkersPath, JSON.stringify(talkers, null, 2));
+  } catch (error) {
+    console.log(`updateTalker error: ${error.message}`);
+  }
+};
+
+module.exports = { readTalkers, getTalkerById, writeTalker, updateTalker };
