@@ -1,5 +1,5 @@
 const { getTalkerById } = require('./utils/fsUtils');
-const { isEmailValid } = require('./utils/utils');
+const { isEmailValid } = require('./utils');
 const { validateRequiredFields, validateFieldsRules } = require('./validation/talkerValidation');
 
 const validateId = async (req, res, next) => {

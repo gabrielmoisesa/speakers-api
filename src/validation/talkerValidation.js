@@ -1,4 +1,4 @@
-const { isDateFormatValid } = require('../utils/utils');
+const { isDateFormatValid } = require('../utils');
 
 const validateRequiredFields = (fields, requestBody) => {
   const missingField = fields.find((field) => !(field in requestBody));

@@ -1,6 +1,6 @@
 const express = require('express');
 const { validateLogin } = require('./middlewares');
-const { generateToken } = require('./utils/utils');
+const { generateToken } = require('./utils');
 const talkerRouter = require('./routes/talkerRouter');
 
 const app = express();
