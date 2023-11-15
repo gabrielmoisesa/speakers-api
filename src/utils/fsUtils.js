@@ -31,6 +31,24 @@ const getTalkersByQuery = async (query) => {
   }
 };
 
+const getTalkersByRate = async (rate) => {
+  try {
+    const talkers = await readTalkers();
+    return talkers.filter((talker) => talker.talk.rate === Number(rate));
+  } catch (error) {
+    console.log(`getTalkerByQuery error: ${error.message}`);
+  }
+};
+
+const getTalkersByQueryAndRate = async (query, rate) => {
+  try {
+    const talkersByQuery = await getTalkersByQuery(query);
+    return talkersByQuery.filter((talker) => talker.talk.rate === Number(rate));
+  } catch (error) {
+    console.log(`getTalkerByQuery error: ${error.message}`);
+  }
+};
+
 const writeTalker = async (newTalker) => {
   try {    
     const talkers = await readTalkers();
@@ -79,6 +97,8 @@ module.exports = {
   readTalkers,
   getTalkerById,
   getTalkersByQuery,
+  getTalkersByRate,
+  getTalkersByQueryAndRate,
   writeTalker,
   updateTalker,
   deleteTalker,

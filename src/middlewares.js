@@ -1,6 +1,10 @@
 const { getTalkerById } = require('./utils/fsUtils');
 const { isEmailValid } = require('./utils');
-const { validateRequiredFields, validateFieldsRules } = require('./validation/talkerValidation');
+const {
+  validateRequiredFields,
+  validateFieldsRules,
+  validateRate,
+} = require('./validation/talkerValidation');
 
 const validateId = async (req, res, next) => {
   const { id } = req.params;
@@ -50,4 +54,17 @@ const validateToken = (req, res, next) => {
   next();
 };
 
-module.exports = { validateLogin, validateTalker, validateToken, validateId };
+const validateSearch = (req, res, next) => {
+  const rate = Number(req.query.rate);
+  const rateValidation = validateRate(rate);
+  if (rateValidation !== true) return res.status(400).json({ message: rateValidation });
+  next();
+};
+
+module.exports = {
+  validateLogin,
+  validateTalker,
+  validateToken,
+  validateId,
+  validateSearch,
+};

@@ -33,4 +33,11 @@ const validateFieldsRules = (requestBody) => {
   return true;
 };
 
-module.exports = { validateRequiredFields, validateFieldsRules };
+const validateRate = (rate) => {
+  if (!(rate >= 1 && rate <= 5) || typeof rate !== 'number' || !Number.isInteger(rate)) {
+    return 'O campo "rate" deve ser um número inteiro entre 1 e 5';
+  }
+  return true;
+};
+
+module.exports = { validateRequiredFields, validateFieldsRules, validateRate };

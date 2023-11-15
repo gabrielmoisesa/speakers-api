@@ -6,10 +6,15 @@ const {
   writeTalker,
   updateTalker,
   deleteTalker,
-  getTalkersByQuery,
 } = require('../utils/fsUtils');
 
-const { validateTalker, validateToken, validateId } = require('../middlewares');
+const {
+  validateTalker,
+  validateToken,
+  validateId,
+  validateSearch,
+} = require('../middlewares');
+const { handleTalkerSearch } = require('../controllers/talkerController');
 
 const router = express.Router();
 
@@ -19,11 +24,7 @@ router.get('/', async (_req, res) => {
   res.status(200).json(talkers);
 });
 
-router.get('/search', validateToken, async (req, res) => {
-  const { q } = req.query;
-  const talkersByQuery = await getTalkersByQuery(q);
-  res.status(200).json(talkersByQuery);
-});
+router.get('/search', validateToken, validateSearch, handleTalkerSearch);
 
 router.get('/:id', validateId, async (req, res) => {
   const { id } = req.params;
