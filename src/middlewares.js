@@ -55,9 +55,11 @@ const validateToken = (req, res, next) => {
 };
 
 const validateSearch = (req, res, next) => {
-  const rate = Number(req.query.rate);
-  const rateValidation = validateRate(rate);
-  if (rateValidation !== true) return res.status(400).json({ message: rateValidation });
+  const { rate } = req.query;
+  if (rate) {
+    const rateValidation = validateRate(rate);
+    if (rateValidation !== true) return res.status(400).json({ message: rateValidation });
+  }
   next();
 };
 

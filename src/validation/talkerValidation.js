@@ -34,7 +34,12 @@ const validateFieldsRules = (requestBody) => {
 };
 
 const validateRate = (rate) => {
-  if (!(rate >= 1 && rate <= 5) || typeof rate !== 'number' || !Number.isInteger(rate)) {
+  const numberRate = Number(rate);
+  if (
+    typeof numberRate !== 'number'
+    || !Number.isInteger(numberRate)
+    || !(numberRate >= 1 && numberRate <= 5)
+  ) {
     return 'O campo "rate" deve ser um número inteiro entre 1 e 5';
   }
   return true;
