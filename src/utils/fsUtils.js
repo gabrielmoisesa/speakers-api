@@ -21,6 +21,16 @@ const getTalkerById = async (id) => {
   }
 };
 
+const getTalkersByQuery = async (query) => {
+  try {
+    const talkers = await readTalkers();
+    if (!query) return talkers;
+    return talkers.filter((talker) => ((talker.name).toLowerCase()).includes(query.toLowerCase()));
+  } catch (error) {
+    console.log(`getTalkerByQuery error: ${error.message}`);
+  }
+};
+
 const writeTalker = async (newTalker) => {
   try {    
     const talkers = await readTalkers();
@@ -65,4 +75,11 @@ const deleteTalker = async (id) => {
   }
 };
 
-module.exports = { readTalkers, getTalkerById, writeTalker, updateTalker, deleteTalker };
+module.exports = {
+  readTalkers,
+  getTalkerById,
+  getTalkersByQuery,
+  writeTalker,
+  updateTalker,
+  deleteTalker,
+};
