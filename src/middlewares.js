@@ -56,10 +56,12 @@ const validateToken = (req, res, next) => {
 
 const validateSearch = (req, res, next) => {
   const { rate } = req.query;
-  if (rate) {
-    const rateValidation = validateRate(rate);
-    if (rateValidation !== true) return res.status(400).json({ message: rateValidation });
+
+  if (rate && !validateRate(rate)) {
+    return res.status(400)
+      .json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
   }
+  
   next();
 };
 
