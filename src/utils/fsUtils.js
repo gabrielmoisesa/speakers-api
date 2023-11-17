@@ -21,34 +21,6 @@ const getTalkerById = async (id) => {
   }
 };
 
-const getTalkersByQuery = async (query) => {
-  try {
-    const talkers = await readTalkers();
-    if (!query) return talkers;
-    return talkers.filter((talker) => ((talker.name).toLowerCase()).includes(query.toLowerCase()));
-  } catch (error) {
-    console.log(`getTalkerByQuery error: ${error.message}`);
-  }
-};
-
-const getTalkersByRate = async (rate) => {
-  try {
-    const talkers = await readTalkers();
-    return talkers.filter((talker) => talker.talk.rate === Number(rate));
-  } catch (error) {
-    console.log(`getTalkerByQuery error: ${error.message}`);
-  }
-};
-
-const getTalkersByQueryAndRate = async (query, rate) => {
-  try {
-    const talkersByQuery = await getTalkersByQuery(query);
-    return talkersByQuery.filter((talker) => talker.talk.rate === Number(rate));
-  } catch (error) {
-    console.log(`getTalkerByQuery error: ${error.message}`);
-  }
-};
-
 const writeTalker = async (newTalker) => {
   try {    
     const talkers = await readTalkers();
@@ -96,9 +68,6 @@ const deleteTalker = async (id) => {
 module.exports = {
   readTalkers,
   getTalkerById,
-  getTalkersByQuery,
-  getTalkersByRate,
-  getTalkersByQueryAndRate,
   writeTalker,
   updateTalker,
   deleteTalker,

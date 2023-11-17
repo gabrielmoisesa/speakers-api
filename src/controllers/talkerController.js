@@ -1,20 +1,15 @@
-const { 
-  getTalkersByQueryAndRate, 
-  getTalkersByRate, 
-  getTalkersByQuery } = require('../utils/fsUtils');
+const { filterTalkersByQuery, filterTalkersByRate } = require('../utils/filters');
+const { readTalkers } = require('../utils/fsUtils');
 
 const handleTalkerSearch = async (req, res) => {
   const { q, rate } = req.query;
 
-  if (q && rate) return res.status(200).json(await getTalkersByQueryAndRate(q, rate));
+  let result = await readTalkers();
 
-  if (rate) {
-    const talkersByRate = await getTalkersByRate(rate);
-    return res.status(200).json(talkersByRate);
-  }
+  if (q) result = filterTalkersByQuery(result, q);
+  if (rate) result = filterTalkersByRate(result, rate);
 
-  const talkersByQuery = await getTalkersByQuery(q);
-  res.status(200).json(talkersByQuery);
+  res.status(200).json(result);
 };
 
 module.exports = { handleTalkerSearch };
