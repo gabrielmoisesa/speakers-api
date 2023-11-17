@@ -1,5 +1,5 @@
 const { getTalkerById } = require('./utils/fsUtils');
-const { isEmailValid } = require('./utils');
+const { isEmailValid, isDateFormatValid } = require('./utils');
 const {
   validateRequiredFields,
   validateFieldsRules,
@@ -55,11 +55,15 @@ const validateToken = (req, res, next) => {
 };
 
 const validateSearch = (req, res, next) => {
-  const { rate } = req.query;
+  const { rate, date } = req.query;
 
   if (rate && !validateRate(rate)) {
     return res.status(400)
       .json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
+  }
+
+  if (date && !isDateFormatValid(date)) {
+    return res.status(400).json({ message: 'O parâmetro "date" deve ter o formato "dd/mm/aaaa"' });
   }
   
   next();
