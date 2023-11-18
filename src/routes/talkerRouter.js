@@ -6,6 +6,7 @@ const {
   writeTalker,
   updateTalker,
   deleteTalker,
+  updateTalkerRate,
 } = require('../utils/fsUtils');
 
 const {
@@ -13,6 +14,7 @@ const {
   validateToken,
   validateId,
   validateSearch,
+  validateRatePatch,
 } = require('../middlewares');
 const { handleTalkerSearch } = require('../controllers/talkerController');
 
@@ -45,6 +47,13 @@ router.put('/:id', validateToken, validateId, validateTalker, async (req, res) =
   await updateTalker(id, updatedTalker);
   const talkerById = await getTalkerById(id);
   res.status(200).json(talkerById);
+});
+
+router.patch('/rate/:id', validateToken, validateId, validateRatePatch, async (req, res) => {
+  const { id } = req.params;
+  const { rate } = req.body;
+  await updateTalkerRate(id, rate);
+  res.status(204).end();
 });
 
 router.delete('/:id', validateToken, validateId, async (req, res) => {

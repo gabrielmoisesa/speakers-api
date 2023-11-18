@@ -4,6 +4,7 @@ const {
   validateRequiredFields,
   validateFieldsRules,
   validateRate,
+  invalidRateMessage,
 } = require('./validation/talkerValidation');
 
 const validateId = async (req, res, next) => {
@@ -59,12 +60,23 @@ const validateSearch = (req, res, next) => {
 
   if (rate && !validateRate(rate)) {
     return res.status(400)
-      .json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
+      .json({ message: invalidRateMessage });
   }
 
   if (date && !isDateFormatValid(date)) {
     return res.status(400).json({ message: 'O parâmetro "date" deve ter o formato "dd/mm/aaaa"' });
   }
+  
+  next();
+};
+
+const validateRatePatch = (req, res, next) => {
+  const { rate } = req.body;
+  const requiredValidation = validateRequiredFields(['rate'], req.body);
+
+  if (requiredValidation !== true) return res.status(400).json({ message: requiredValidation }); 
+
+  if (!validateRate(rate)) return res.status(400).json({ message: invalidRateMessage });
   
   next();
 };
@@ -75,4 +87,5 @@ module.exports = {
   validateToken,
   validateId,
   validateSearch,
+  validateRatePatch,
 };

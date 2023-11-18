@@ -55,6 +55,21 @@ const updateTalker = async (id, updatedTalker) => {
   }
 };
 
+const updateTalkerRate = async (id, rate) => {
+  try {
+    const talkers = await readTalkers();
+    const talkerIndex = talkers.findIndex((talker) => talker.id === Number(id));
+
+    if (talkerIndex === -1) return false;
+
+    talkers[talkerIndex].talk.rate = Number(rate);
+
+    await fs.writeFile(talkersPath, JSON.stringify(talkers, null, 2));
+  } catch (error) {
+    console.log(`updateTalkerRate error: ${error.message}`);
+  }
+};
+
 const deleteTalker = async (id) => {
   try {
     const talkers = await readTalkers();
@@ -70,5 +85,6 @@ module.exports = {
   getTalkerById,
   writeTalker,
   updateTalker,
+  updateTalkerRate,
   deleteTalker,
 };

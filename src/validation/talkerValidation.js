@@ -1,5 +1,7 @@
 const { isDateFormatValid } = require('../utils');
 
+const invalidRateMessage = 'O campo "rate" deve ser um número inteiro entre 1 e 5';
+
 const validateRequiredFields = (fields, requestBody) => {
   const missingField = fields.find((field) => !(field in requestBody));
   return missingField ? `O campo "${missingField}" é obrigatório` : true;
@@ -43,4 +45,4 @@ const validateRate = (rate) => {
   );
 };
 
-module.exports = { validateRequiredFields, validateFieldsRules, validateRate };
+module.exports = { validateRequiredFields, validateFieldsRules, validateRate, invalidRateMessage };
