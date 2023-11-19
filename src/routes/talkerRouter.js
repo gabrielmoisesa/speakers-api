@@ -16,6 +16,8 @@ router.get('/', controller.get);
 
 router.get('/search', validateToken, validateSearch, controller.getSearch);
 
+router.get('/db', controller.getDb);
+
 router.get('/:id', validateId, controller.getId);
 
 router.post('/', validateToken, validateTalker, controller.post);

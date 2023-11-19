@@ -1,3 +1,4 @@
+const db = require('../db');
 const filterTalkers = require('../utils/filterTalkers');
 const {
   readTalkers,
@@ -32,6 +33,11 @@ const getId = async (req, res) => {
   res.status(200).json(talkerById);
 };
 
+const getDb = async (_req, res) => {
+  const [talkers] = await db.findAll();
+  res.status(200).json(talkers);
+};
+
 const post = async (req, res) => {
   const newTalker = req.body;
   await writeTalker(newTalker);
@@ -64,6 +70,7 @@ module.exports = {
   get, 
   getSearch, 
   getId,
+  getDb,
   post,
   putId,
   patchRate,
