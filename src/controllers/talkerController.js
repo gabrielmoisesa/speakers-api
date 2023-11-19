@@ -37,13 +37,12 @@ const getDb = async (_req, res) => {
   const [talkers] = await db.findAll();
 
   const formattedTalkers = talkers.map((talker) => {
-    // eslint-disable-next-line camelcase
-    const { id, name, age, talk_watched_at, talk_rate } = talker;
+    const { id, name, age } = talker;
     return { 
       id, 
       name, 
       age, 
-      talk: { watchedAt: talk_watched_at, rate: talk_rate }, 
+      talk: { watchedAt: talker.talk_watched_at, rate: talker.talk_rate }, 
     };
   });
 
