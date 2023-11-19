@@ -1,2 +1,2 @@
 # speakers-api
-Under development
+Readme soon
