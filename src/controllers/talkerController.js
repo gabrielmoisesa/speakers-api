@@ -35,7 +35,19 @@ const getId = async (req, res) => {
 
 const getDb = async (_req, res) => {
   const [talkers] = await db.findAll();
-  res.status(200).json(talkers);
+
+  const formattedTalkers = talkers.map((talker) => {
+    // eslint-disable-next-line camelcase
+    const { id, name, age, talk_watched_at, talk_rate } = talker;
+    return { 
+      id, 
+      name, 
+      age, 
+      talk: { watchedAt: talk_watched_at, rate: talk_rate }, 
+    };
+  });
+
+  res.status(200).json(formattedTalkers);
 };
 
 const post = async (req, res) => {
