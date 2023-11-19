@@ -1,7 +1,5 @@
 const express = require('express');
-const { validateLogin } = require('./middlewares');
-const { generateToken } = require('./utils');
-const talkerRouter = require('./routes/talkerRouter');
+const { talkerRouter, loginRouter } = require('./routes');
 
 const app = express();
 app.use(express.json());
@@ -21,9 +19,7 @@ app.listen(PORT, () => {
 // Routes
 app.use('/talker', talkerRouter);
 
-app.post('/login', validateLogin, (_req, res) => {
-  res.status(200).json({ token: generateToken() });
-});
+app.use('/login', loginRouter);
 
 // Error middleware
 app.use((err, _req, res, _next) => {
