@@ -1,2 +1,2 @@
-# speakers-api
+# talkers-api
 Readme soon
