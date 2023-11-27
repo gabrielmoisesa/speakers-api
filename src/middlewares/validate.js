@@ -1,4 +1,4 @@
-const { getTalkerById } = require('../utils/fsUtils');
+const { fsUtils } = require('../db');
 const { isEmailValid, isDateFormatValid } = require('../utils');
 const {
   validateRequiredFields,
@@ -9,7 +9,7 @@ const {
 
 const id = async (req, res, next) => {
   const { id } = req.params;
-  const talkerById = await getTalkerById(id);
+  const talkerById = await fsUtils.getTalkerById(id);
   if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   next();
 };

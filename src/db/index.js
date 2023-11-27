@@ -1,5 +1,7 @@
-const connection = require('./connection');
+const fsUtils = require('./fsUtils');
+const dbUtils = require('./dbUtils');
 
-const findAll = () => connection.execute('SELECT * FROM talkers');
-
-module.exports = { findAll };
+module.exports = {
+  fsUtils,
+  dbUtils,
+}
