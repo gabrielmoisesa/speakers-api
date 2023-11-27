@@ -1,0 +1,13 @@
+const token = (req, res, next) => {
+  const { authorization } = req.headers;
+  if (!authorization) return res.status(401).json({ message: 'Token não encontrado' });
+  if (authorization.length !== 16) return res.status(401).json({ message: 'Token inválido' });
+  if (typeof authorization !== 'string') {
+    return res.status(401).json({ message: 'Token inválido: precisa ser uma string' });
+  } 
+  next();
+};
+
+module.exports = {
+  token,
+};

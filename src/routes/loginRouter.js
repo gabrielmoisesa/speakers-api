@@ -1,11 +1,11 @@
 const express = require('express');
 
-const { validateLogin } = require('../middlewares');
+const validate = require('../middlewares/validate');
 const { generateToken } = require('../utils');
 
 const router = express.Router();
 
-router.post('/', validateLogin, (_req, res) => {
+router.post('/', validate.login, (_req, res) => {
   res.status(200).json({ token: generateToken() });
 });
 

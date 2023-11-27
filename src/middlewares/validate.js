@@ -1,20 +1,20 @@
-const { getTalkerById } = require('./utils/fsUtils');
-const { isEmailValid, isDateFormatValid } = require('./utils');
+const { getTalkerById } = require('../utils/fsUtils');
+const { isEmailValid, isDateFormatValid } = require('../utils');
 const {
   validateRequiredFields,
   validateFieldsRules,
   validateRate,
   invalidRateMessage,
-} = require('./validation/talkerValidation');
+} = require('../validation/talkerValidation');
 
-const validateId = async (req, res, next) => {
+const id = async (req, res, next) => {
   const { id } = req.params;
   const talkerById = await getTalkerById(id);
   if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   next();
 };
 
-const validateLogin = (req, res, next) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) return res.status(400).json({ message: 'O campo "email" é obrigatório' });
@@ -30,7 +30,7 @@ const validateLogin = (req, res, next) => {
   next();
 };
 
-const validateTalker = (req, res, next) => {
+const talker = (req, res, next) => {
   const requiredValidation = validateRequiredFields(['name', 'age', 'talk'], req.body);
   if (requiredValidation !== true) return res.status(400).json({ message: requiredValidation });
 
@@ -45,17 +45,7 @@ const validateTalker = (req, res, next) => {
   next();
 };
 
-const validateToken = (req, res, next) => {
-  const { authorization } = req.headers;
-  if (!authorization) return res.status(401).json({ message: 'Token não encontrado' });
-  if (authorization.length !== 16) return res.status(401).json({ message: 'Token inválido' });
-  if (typeof authorization !== 'string') {
-    return res.status(401).json({ message: 'Token inválido: precisa ser uma string' });
-  } 
-  next();
-};
-
-const validateSearch = (req, res, next) => {
+const search = (req, res, next) => {
   const { rate, date } = req.query;
 
   if (rate && !validateRate(rate)) {
@@ -70,7 +60,7 @@ const validateSearch = (req, res, next) => {
   next();
 };
 
-const validateRatePatch = (req, res, next) => {
+const ratePatch = (req, res, next) => {
   const { rate } = req.body;
   const requiredValidation = validateRequiredFields(['rate'], req.body);
 
@@ -82,10 +72,9 @@ const validateRatePatch = (req, res, next) => {
 };
 
 module.exports = {
-  validateLogin,
-  validateTalker,
-  validateToken,
-  validateId,
-  validateSearch,
-  validateRatePatch,
+  login,
+  talker,
+  id,
+  search,
+  ratePatch,
 };

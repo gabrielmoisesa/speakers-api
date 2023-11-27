@@ -1,12 +1,7 @@
 const express = require('express');
 
-const {
-  validateTalker,
-  validateToken,
-  validateId,
-  validateSearch,
-  validateRatePatch,
-} = require('../middlewares');
+const auth = require('../middlewares/auth');
+const validate = require('../middlewares/validate');
 
 const controller = require('../controllers/talkerController');
 
@@ -14,18 +9,18 @@ const router = express.Router();
 
 router.get('/', controller.get);
 
-router.get('/search', validateToken, validateSearch, controller.getSearch);
+router.get('/search', auth.token, validate.search, controller.getSearch);
 
 router.get('/db', controller.getDb);
 
-router.get('/:id', validateId, controller.getId);
+router.get('/:id', validate.id, controller.getId);
 
-router.post('/', validateToken, validateTalker, controller.post);
+router.post('/', auth.token, validate.talker, controller.post);
 
-router.put('/:id', validateToken, validateId, validateTalker, controller.putId);
+router.put('/:id', auth.token, validate.id, validate.talker, controller.putId);
 
-router.patch('/rate/:id', validateToken, validateId, validateRatePatch, controller.patchRate);
+router.patch('/rate/:id', auth.token, validate.id, validate.ratePatch, controller.patchRate);
 
-router.delete('/:id', validateToken, validateId, controller.deleteById);
+router.delete('/:id', auth.token, validate.id, controller.deleteById);
 
 module.exports = router;
