@@ -1,5 +1,3 @@
--- Adiciona suporte para caracteres UTF-8 nos comandos abaixo
--- Fonte: https://github.com/docker-library/mysql/issues/131#issuecomment-680802361
 SET
   NAMES utf8mb4;
 
