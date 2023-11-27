@@ -5,7 +5,7 @@ const {
   validateFieldsRules,
   validateRate,
   invalidRateMessage,
-} = require('../validation/talkerValidation');
+} = require('../utils/validateUtils');
 
 const id = async (req, res, next) => {
   const { id } = req.params;

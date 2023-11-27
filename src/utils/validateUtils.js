@@ -1,4 +1,4 @@
-const { isDateFormatValid } = require('../utils');
+const { isDateFormatValid } = require('.');
 
 const invalidRateMessage = 'O campo "rate" deve ser um número inteiro entre 1 e 5';
 
