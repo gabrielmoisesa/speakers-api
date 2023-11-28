@@ -8,8 +8,7 @@ const {
 } = require('../utils/validateUtils');
 
 const id = async (req, res, next) => {
-  const { id } = req.params;
-  const talkerById = await fsUtils.getTalkerById(id);
+  const talkerById = await fsUtils.getTalkerById(req.params.id);
   if (!talkerById) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   next();
 };

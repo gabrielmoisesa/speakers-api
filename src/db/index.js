@@ -4,4 +4,4 @@ const dbUtils = require('./dbUtils');
 module.exports = {
   fsUtils,
   dbUtils,
-}
+};

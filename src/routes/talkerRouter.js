@@ -4,6 +4,7 @@ const auth = require('../middlewares/auth');
 const validate = require('../middlewares/validate');
 
 const { talkerController } = require('../controllers');
+
 const controller = talkerController;
 
 const router = express.Router();
