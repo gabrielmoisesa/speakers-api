@@ -38,7 +38,7 @@ docker-compose up -d
 
 4. Access the container bash
 ```sh
-docker exec -it talkers-api bash
+docker exec -it talker_manager bash
 ```
 
 5. Run the application
