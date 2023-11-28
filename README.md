@@ -84,6 +84,10 @@ The development of the project was based in requirements and testing by [Trybe](
 
 ### Requirements List
 
+<details>
+   <summary>Requirements</summary>
+<br>
+
 **1.** Create the GET /talker endpoint
 
 **2.** Create the GET /talker/:id endpoint
@@ -108,6 +112,8 @@ talker/search endpoint
 **11.** Create the PATCH /talker/rate/:id endpoint
 
 **12.** Create the GET /talker/db endpoint
+
+</details>
 
 ### Testing (by [Trybe](https://github.com/tryber))
 
