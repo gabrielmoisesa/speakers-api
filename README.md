@@ -86,32 +86,30 @@ The development of the project was based in requirements and testing by [Trybe](
 
 <details>
    <summary>Requirements</summary>
-<br>
 
-**1.** Create the GET /talker endpoint
+- [x] **1.** Create the GET /talker endpoint
 
-**2.** Create the GET /talker/:id endpoint
+- [x] **2.** Create the GET /talker/:id endpoint
 
-**3.** Create the POST /login endpoint
+- [x] **3.** Create the POST /login endpoint
 
-**4.** Add validations for the /login endpoint
+- [x] **4.** Add validations for the /login endpoint
 
-**5.** Create the POST /talker endpoint
+- [x] **5.** Create the POST /talker endpoint
 
-**6.** Create the PUT /talker/:id endpoint
+- [x] **6.** Create the PUT /talker/:id endpoint
 
-**7.** Create the DELETE /talker/:id endpoint
+- [x] **7.** Create the DELETE /talker/:id endpoint
 
-**8.** Create the GET /talker/search?q=searchTerm endpoint
+- [x] **8.** Create the GET /talker/search?q=searchTerm endpoint
 
-**9.** Create the minRate=rateNumber query parameter in the GET /
-talker/search endpoint
+- [x] **9.** Create the minRate=rateNumber query parameter in the GET /talker/search endpoint
 
-**10.** Create the query parameter date=watchedDate in the GET /talker/search endpoint
+- [x] **10.** Create the query parameter date=watchedDate in the GET /talker/search endpoint
 
-**11.** Create the PATCH /talker/rate/:id endpoint
+- [x] **11.** Create the PATCH /talker/rate/:id endpoint
 
-**12.** Create the GET /talker/db endpoint
+- [x] **12.** Create the GET /talker/db endpoint
 
 </details>
 
