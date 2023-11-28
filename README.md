@@ -1,6 +1,6 @@
-# Talkers Api 🗣️
+# Talkers API 🗣️
 
-The Talkers Api is a simple REST API designed for managing a collection of talkers. It provides basic CRUD (Create, Read, Update, Delete) operations to interact with talker data. This API is ideal for applications that require a backend system to handle speaker profiles, interviews, or any scenario where managing talkers' information is essential.
+The Talkers API is a simple REST API designed for managing a collection of talkers. It provides basic CRUD (Create, Read, Update, Delete) operations to interact with talker data. This API is ideal for applications that require a backend system to handle speaker profiles, interviews, or any scenario where managing talkers' information is essential.
 
 <details>
   <summary>Table of Contents</summary>
